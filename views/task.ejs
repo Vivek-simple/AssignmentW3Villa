@@ -1,0 +1,116 @@
+<% layout("boilerplate") %>
+<style>
+  @media screen and (max-width: 450px) {
+    .delete-btn,
+    .edit-btn,
+    .save-btn,
+    .add-btn {
+      font-size: 13px;
+      padding: 4px 8px;
+    }
+
+    .card-body {
+      padding: 0 !important;
+    }
+
+    input {
+      font-size: 13px !important;
+    }
+  }
+</style>
+<% if (error) { %>
+<div
+  class="alert alert-danger alert-dismissible fade show col-md-6 col-sm-8 col-10 offset-md-3 offset-sm-2 offset-1 mt-3"
+  role="alert"
+>
+  <strong>Error:</strong> <%= error %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %>
+<div class="container mt-5">
+  <div
+    class="card shadow-sm border p-3 rounded"
+    style="max-width: 800px; margin: auto"
+  >
+    <div class="card-body">
+      <div class="row mb-4">
+        <form
+          action="/addTask"
+          class="d-flex align-items-center justify-content-between"
+          method="POST"
+        >
+          <div class="col-7">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter task..."
+              name="task"
+              required
+            />
+          </div>
+          <div class="col-4">
+            <button class="btn btn-primary add-btn">Add</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
+          <form
+            action="/editTask/<%= task._id %>"
+            method="POST"
+            class="d-flex mb-2"
+          >
+            <input
+              type="text"
+              class="form-control me-2 task-input"
+              id="task-<%= task._id %>"
+              name="task"
+              value="<%= task.task %>"
+              readonly
+              required
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-2 edit-btn"
+              onclick="Edit('<%= task._id %>')"
+              id="edit-<%= task._id %>"
+            >
+              Edit
+            </button>
+            <button
+              type="submit"
+              class="btn btn-success me-2 save-btn"
+              id="save-<%= task._id %>"
+              style="display: none"
+            >
+              Save
+            </button>
+            <a
+              href="/deleteTask/<%= task._id %>"
+              class="btn btn-outline-danger delete-btn"
+              >Delete</a
+            >
+          </form>
+          <% }); %> <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function Edit(taskId) {
+    const input = document.getElementById(`task-${taskId}`);
+    const save = document.getElementById(`save-${taskId}`);
+    const edit = document.getElementById(`edit-${taskId}`);
+    input.removeAttribute("readonly");
+    edit.style.display = "none";
+    save.style.display = "block";
+  }
+</script>

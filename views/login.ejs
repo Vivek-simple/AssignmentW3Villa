@@ -1,0 +1,44 @@
+<% layout("boilerplate") %> <% if (error) { %>
+<div
+  class="alert alert-danger alert-dismissible fade show col-md-6 col-sm-8 col-10 offset-md-3 offset-sm-2 offset-1 mt-3"
+  role="alert"
+>
+  <strong>Error:</strong> <%= error %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %>
+<div class="row">
+  <div
+    class="col-md-6 col-sm-8 col-10 offset-md-3 offset-sm-2 offset-1 mt-3 border p-4 rounded shadow-sm form-col"
+  >
+    <form action="/login" method="POST">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          name="email"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          name="password"
+          required
+        />
+      </div>
+      <button class="btn btn-success">Login</button>
+    </form>
+  </div>
+</div>

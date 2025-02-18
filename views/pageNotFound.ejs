@@ -1,0 +1,14 @@
+<% layout("boilerplate") %> <% if (error) { %>
+<div
+  class="alert alert-danger alert-dismissible fade show col-md-6 col-sm-8 col-10 offset-md-3 offset-sm-2 offset-1 mt-3"
+  role="alert"
+>
+  <strong>Error:</strong> <%= error %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %>
