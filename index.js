@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
 app.get("/", (req, res) => {
   res.render("home.ejs");
